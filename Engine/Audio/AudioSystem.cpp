@@ -1,4 +1,5 @@
 #include "AudioSystem.h"
+#include "Core/Logger.h"
 #include <fmod.hpp>
 
 namespace cool
@@ -33,6 +34,12 @@ namespace cool
 		{
 			FMOD::Sound* sound = nullptr;
 			m_fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
+
+			if (sound == nullptr)
+			{
+				LOG("AHHHHHHHHHHHHHH ERROR &s", filename.c_str());
+			}
+
 			m_sounds[name] = sound;
 		}
 	}
@@ -40,6 +47,12 @@ namespace cool
 	void cool::AudioSystem::PlayAudio(const std::string& name, bool loop)
 	{
 		auto iter = m_sounds.find(name);
+
+		if (iter == m_sounds.end())
+		{
+			LOG("AHHHHHHHHHHHHHHHHHH ERROR NO SOUND &s", name.c_str());
+		}
+
 		if (iter != m_sounds.end())
 		{
 

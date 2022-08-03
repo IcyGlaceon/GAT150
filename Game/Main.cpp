@@ -18,10 +18,10 @@ int main()
 	cool::g_renderer.CreateWindow("Neumont", 800, 600);
 	cool::g_renderer.setClearColor(cool::Color{ 60,60,60,255 });
 
+	std::shared_ptr<cool::Texture> texture = std::make_shared<cool::Texture>();
+	texture->Create(cool::g_renderer, "Kirby.png");
 	{
 		//game creation
-	std::shared_ptr<cool::Texture> texture = std::make_shared<cool::Texture>();
-	texture->Create(cool::g_renderer, "sf2.bmp");
 		
 
 		bool quit = false;
