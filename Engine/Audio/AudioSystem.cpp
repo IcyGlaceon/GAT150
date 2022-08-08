@@ -37,7 +37,7 @@ namespace cool
 
 			if (sound == nullptr)
 			{
-				LOG("AHHHHHHHHHHHHHH ERROR &s", filename.c_str());
+				//LOG("AHHHHHHHHHHHHHH ERROR &s", filename.c_str());
 			}
 
 			m_sounds[name] = sound;
@@ -50,7 +50,7 @@ namespace cool
 
 		if (iter == m_sounds.end())
 		{
-			LOG("AHHHHHHHHHHHHHHHHHH ERROR NO SOUND &s", name.c_str());
+			//LOG("AHHHHHHHHHHHHHHHHHH ERROR NO SOUND &s", name.c_str());
 		}
 
 		if (iter != m_sounds.end())
