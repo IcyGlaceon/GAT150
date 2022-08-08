@@ -19,7 +19,8 @@ namespace cool
 		virtual void Draw(Renderer& renderer);
 
 		void AddComponent(std::unique_ptr<Component> component);
-
+		template<typename T>
+		T* GetComponent();
 
 		virtual void OnCollision(Actor* other) {}
 
@@ -40,4 +41,16 @@ namespace cool
 		std::vector<std::unique_ptr<Component>> m_components;
 		
 	};
+
+	template<typename T>
+	inline T* Actor::GetComponent()
+	{
+		for (auto& component : m_components)
+		{
+			T* result = dynamic_cast<T*>(component.get());
+			if (result) return result;
+		}
+
+		return nullptr;
+	}
 }

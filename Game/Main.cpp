@@ -20,21 +20,30 @@ int main()
 	cool::g_renderer.setClearColor(cool::Color{ 60,60,60,255 });
 
 	std::shared_ptr<cool::Texture> texture = std::make_shared<cool::Texture>();
-	texture->Create(cool::g_renderer, "Kirby.png");
+	texture->Create(cool::g_renderer, "spaceShips_004.png");
 	
+	cool::g_audioSystem.AddAudio("laser", "Laser.wav");
 
 	//create actors
 	cool::Scene scene;
 	
 
-	cool::Transform transform{ {100,100}, 180, {1,1} };
+	cool::Transform transform{ {100,100}, 0, {1,1} };
 
 	std::unique_ptr<cool::Actor> actor = std::make_unique <cool::Actor>(transform);
 	std::unique_ptr<cool::PlayerComponent> pComponent = std::make_unique<cool::PlayerComponent>();
 	actor->AddComponent(std::move(pComponent));
+	
 	std::unique_ptr<cool::SpriteComponent> sComponent = std::make_unique<cool::SpriteComponent>();
 	sComponent->m_texture = texture;
 	actor->AddComponent(std::move(sComponent));
+	
+	std::unique_ptr<cool::AudioComponent> aComponent = std::make_unique<cool::AudioComponent>();
+	aComponent->m_sound = "laser";
+	actor->AddComponent(std::move(aComponent));
+	
+	std::unique_ptr<cool::PhysicsComponent> phComponent = std::make_unique<cool::PhysicsComponent>();
+	actor->AddComponent(std::move(phComponent));
 
 	scene.Add(std::move(actor));
 
@@ -60,7 +69,7 @@ int main()
 
 		scene.Draw(cool::g_renderer);
 
-		cool::g_renderer.Draw(texture, { 400,400 }, angle, {0.5f,0.5f}, { 0.5f,1.0f });
+		//cool::g_renderer.Draw(texture, { 400,400 }, angle, {0.5f,0.5f}, { 0.5f,1.0f });
 
 		cool::g_renderer.EndFrame();
 	}
