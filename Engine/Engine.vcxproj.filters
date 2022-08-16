@@ -29,6 +29,9 @@
     <Filter Include="Source\Components">
       <UniqueIdentifier>{3566ca44-d94a-40b5-985e-b21ce96fc8f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Resource">
+      <UniqueIdentifier>{2524b509-a437-46b3-8594-65669681bb1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathUtils.cpp">
@@ -96,6 +99,15 @@
     </ClCompile>
     <ClCompile Include="Math\Matrix2x2.cpp">
       <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix3x3.cpp">
+      <Filter>Source\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ModelComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceManager.cpp">
+      <Filter>Source\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +198,24 @@
     <ClInclude Include="Math\Vector3.h">
       <Filter>Source\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Math\Matrix3x3.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ModelComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>Source\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>Source\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Singleton.h">
+      <Filter>Source\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Factory.h">
+      <Filter>Source\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Assets\Player.txt">
@@ -201,6 +231,9 @@
       <Filter>Resources</Filter>
     </Text>
     <Text Include="..\Build\Assets\SpearEnemy.txt">
+      <Filter>Resources</Filter>
+    </Text>
+    <Text Include="..\Build\Assets\level.txt">
       <Filter>Resources</Filter>
     </Text>
   </ItemGroup>

@@ -1,6 +1,8 @@
 #pragma once
 #include "Math/Transform.h"
 
+#define REGISTER_CLASS(class) Factory::Instance().Register<class>(#class)
+
 namespace cool
 {
 	class GameObject
@@ -8,6 +10,6 @@ namespace cool
 	public:
 		GameObject() = default;
 		
-		virtual void Update() = 0;		
+		virtual void Update() = 0;
 	};
 }

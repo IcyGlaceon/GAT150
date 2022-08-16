@@ -48,7 +48,7 @@ namespace cool
 
 		//comparison
 		bool operator == (const Vector3& v) const { return (this->x == v.x && this->y == v.y && this->z == v.z); }
-		bool operator != (const Vector3& v) const { return (this->x != v.x || this->y != v.y || this->z != v.z); }
+		bool operator != (const Vector3& v) const { return !(*this == v); }
 
 		//functions
 		float LengthSqr();
