@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Factory.h"
 #include <iostream>
 
 
@@ -56,6 +57,34 @@ namespace cool
 		actor->m_scene = this;
 		m_actors.push_back(std::move(actor));
 
+	}
+
+	bool Scene::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
+
+	bool Scene::Read(const rapidjson::Value& value)
+	{
+		if (!(value.HasMember("actors")) || !value["actors"].IsArray())
+		{
+			return false;
+		}
+
+		for (auto& actorValue : value["actors"].GetArray())
+		{
+			std::string type;
+			READ_DATA(actorValue, type);
+			auto actor = Factory::Instance().Create<Actor>(type);
+			if (actor)
+			{
+				//read actor
+				actor->Read(actorValue);
+				Add(std::move(actor));
+			}
+		}
+
+		return true;
 	}
 }
 

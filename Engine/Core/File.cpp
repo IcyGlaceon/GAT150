@@ -32,7 +32,7 @@ namespace cool
 	{
 		if (!FileExists(pathname)) {
 		
-			//LOG("Error NO FILE %s", pathname.c_str());
+			LOG("Error NO FILE %s", pathname.c_str());
 			return false;
 		}
 		//getting file size and setting buffer size

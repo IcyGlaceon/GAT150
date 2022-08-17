@@ -67,7 +67,7 @@ namespace cool
 
 		if (!cool::ReadFile(filename, buffer))
 		{
-			//LOG("Error NO FILE %s", filename.c_str());
+			LOG("Error NO FILE %s", filename.c_str());
 			return false;
 		};
 

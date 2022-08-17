@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Component.h"
+#include "Serialization/Serializable.h"
 
 namespace cool
 {
@@ -11,6 +12,9 @@ namespace cool
 		void Update() override;
 		void AppliedForce(const Vector2& force) { m_acceleration += force; }
 
+
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 	public:
 		Vector2 m_velocity;
 		Vector2 m_acceleration;

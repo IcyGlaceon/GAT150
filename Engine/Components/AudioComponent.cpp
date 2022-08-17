@@ -17,4 +17,15 @@ namespace cool
 	{
 	}
 
+	bool AudioComponent::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
+
+	bool AudioComponent::Read(const rapidjson::Value& value)
+	{
+
+		return true;
+	}
+
 }

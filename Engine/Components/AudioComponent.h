@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Component.h"
+#include "Serialization/Serializable.h"
 
 namespace cool
 {
@@ -20,7 +21,8 @@ namespace cool
 		float m_pitch = 1;
 		bool loop = false;
 
-		
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 	};
 }

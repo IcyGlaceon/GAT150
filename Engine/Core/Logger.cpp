@@ -4,7 +4,7 @@
 
 namespace cool
 {
-
+	Logger g_logger;
 	void Logger::Log(const char* format, ...)
 	{
 		va_list args;

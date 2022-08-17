@@ -9,7 +9,7 @@ namespace cool
 	class Component;
 	class Renderer;
 
-	class Actor : public GameObject
+	class Actor : public GameObject, public ISerializable
 	{
 	public:
 		Actor() = default;
@@ -17,6 +17,9 @@ namespace cool
 		
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
+
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 		void AddChild(std::unique_ptr<Actor> child);
 
@@ -28,13 +31,20 @@ namespace cool
 		virtual void OnCollision(Actor* other) {}
 
 		float GetRadius() { return 0; }// m_model.GetRadius()* std::max(m_transform.scale.x, m_transform.scale.y); }
-		std::string& GetTag() { return m_tag; }
+		std::string& GetTag() { return tag; }
+		void SetTag(const std::string& tag) { this->tag = tag; }
+		
+		std::string& GetName() { return name; }
+		void SetName(const std::string& name) { this->name = name; }
 
 		friend class Scene;
 
 		Transform m_transform;
 	protected:
-		std::string m_tag;
+		std::string name;
+		std::string tag;
+
+
 		bool m_destroy = false;
 		//pyysics
 		Vector2 m_velocity;

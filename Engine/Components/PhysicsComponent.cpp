@@ -12,4 +12,15 @@ namespace cool
 		m_acceleration = Vector2::zero;
 	}
 
+	bool PhysicsComponent::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
+
+	bool PhysicsComponent::Read(const rapidjson::Value& value)
+	{
+
+		return true;
+	}
+
 }

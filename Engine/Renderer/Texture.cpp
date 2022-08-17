@@ -35,7 +35,7 @@ namespace cool
         SDL_Surface* surface = IMG_Load(filename.c_str());
         if (surface == nullptr)
         {
-           // LOG(SDL_GetError());
+           LOG(SDL_GetError());
             return false;
         }
 
@@ -45,7 +45,7 @@ namespace cool
         if (m_texture == nullptr)
         {
         SDL_FreeSurface(surface);
-           // LOG(SDL_GetError());
+           LOG(SDL_GetError());
             return false;
         }
             return true;

@@ -11,7 +11,7 @@ namespace cool
 	class Renderer;
 	class Game;
 
-	class Scene
+	class Scene : public ISerializable
 	{
 	public:
 		Scene() = default;
@@ -26,12 +26,15 @@ namespace cool
 		template<typename T>
 		T* GetActor();
 
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 		Game* GetGame() { return m_game; }
 
 	private:
 		std::list<std::unique_ptr<Actor>> m_actors;
 		Game* m_game;
+
 	};
 
 	template<typename T>

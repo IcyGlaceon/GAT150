@@ -9,5 +9,6 @@ namespace cool
 	{
 	public:
 		virtual void Draw(Renderer& renderer) = 0;
+
 	};
 }

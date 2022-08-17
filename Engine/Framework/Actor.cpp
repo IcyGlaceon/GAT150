@@ -1,5 +1,6 @@
 #include "Actor.h"
 #include "Components/RenderComponent.h"
+#include "Factory.h"
 
 namespace cool {
 	void Actor::Update()
@@ -43,6 +44,37 @@ namespace cool {
 	{
 		component->m_owner = this;
 		m_components.push_back(std::move(component));
+	}
+
+	bool Actor::Write(const rapidjson::Value& value) const
+	{
+		return true;
+	}
+
+	bool Actor::Read(const rapidjson::Value& value)
+	{
+		READ_DATA(value, tag);
+		READ_DATA(value, name);
+
+		m_transform.Read(value["actors"]);
+
+		if (!(value.HasMember("actors")) || !value["actors"].IsArray())
+		{
+			for (auto& componentValue : value["components"].GetArray())
+			{
+				std::string type;
+				READ_DATA(componentValue, type);
+				
+				auto component = Factory::Instance().Create<Component>(type);
+				if (component)
+				{
+					component->Read(componentValue);
+					AddComponent(std::move(component));
+				}
+			}
+		}
+
+		return true;
 	}
 }
 

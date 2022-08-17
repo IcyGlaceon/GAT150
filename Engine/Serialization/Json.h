@@ -2,6 +2,8 @@
 #include "rapidjson/document.h"
 #include <string>
 
+#define READ_DATA(value,data) cool::json::Get(value, #data, data);
+
 namespace cool
 {
 	struct Vector2;

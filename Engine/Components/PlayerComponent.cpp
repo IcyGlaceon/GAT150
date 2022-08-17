@@ -22,7 +22,7 @@ namespace cool
 		float thrust = 0;
 		if (g_inputSystem.GetKeyState(key_up) == InputSystem::State::Held)
 		{
-			thrust = 100;
+			thrust = speed;
 		}
 
 		auto component = m_owner->GetComponent<PhysicsComponent>();
@@ -47,6 +47,19 @@ namespace cool
 				component->Play();
 			}
 		}
+
 	}
+
+		bool PlayerComponent::Write(const rapidjson::Value & value) const
+		{
+			return true;
+		}
+
+		bool PlayerComponent::Read(const rapidjson::Value & value)
+		{
+			READ_DATA(value, speed);
+
+			return true;
+		}
 
 }
