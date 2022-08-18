@@ -5,8 +5,6 @@ int main()
 {
 	cool::InitializeMemory();
 	cool::SetFilePath("../Assets");
-
-
 	
 
 	

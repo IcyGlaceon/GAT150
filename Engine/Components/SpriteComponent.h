@@ -1,6 +1,6 @@
 #pragma once
 #include "RenderComponent.h"
-#include "Serialization/Serializable.h"
+#include "Math/Rect.h"
 
 namespace cool
 {
@@ -15,7 +15,9 @@ namespace cool
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
+
 	public:
+		Rect source;
 		std::shared_ptr<Texture> m_texture;
 	};
 }

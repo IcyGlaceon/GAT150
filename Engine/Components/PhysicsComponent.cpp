@@ -19,6 +19,10 @@ namespace cool
 
 	bool PhysicsComponent::Read(const rapidjson::Value& value)
 	{
+		READ_DATA(value, m_damping);
+		READ_DATA(value, m_acceleration);
+		READ_DATA(value, m_velocity);
+
 
 		return true;
 	}

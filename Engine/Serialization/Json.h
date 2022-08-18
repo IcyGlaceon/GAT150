@@ -2,16 +2,14 @@
 #include "rapidjson/document.h"
 #include <string>
 
-#define READ_DATA(value,data) cool::json::Get(value, #data, data);
-
-namespace cool
-{
-	struct Vector2;
-	struct Color;
-}
+#define READ_DATA(value,data) cool::json::Get(value, #data, data)
 
 namespace cool 
 {
+	struct Vector2;
+	struct Color;
+	struct Rect;
+
 	namespace json
 	{
 
@@ -23,5 +21,6 @@ namespace cool
 		bool Get(const rapidjson::Value& value, const std::string& name, std::string& data);
 		bool Get(const rapidjson::Value& value, const std::string& name, Vector2& data);
 		bool Get(const rapidjson::Value& value, const std::string& name, Color& data);
+		bool Get(const rapidjson::Value& value, const std::string& name, Rect& data);
 	}
 }
