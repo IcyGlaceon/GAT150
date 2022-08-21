@@ -3,7 +3,7 @@
       {
          "type":"Actor",
          "name":"Player",
-         "tag":"Player",
+         "tag":"player",
          "transform":{
             "position":[
                400,
@@ -22,13 +22,13 @@
             },
             {
                "type":"PhysicsComponent",
-               "m_damping":0.99
+               "damping":0.99
             },
             {
                "type":"SpriteAnimComponent",
                "texture_name":"Textures/gothic-hero-idle.png",
                "fps":12,
-               "num_colums":4,
+               "num_columns":4,
                "num_rows":1,
                "start_frame":1,
                "end_frame":4

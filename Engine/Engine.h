@@ -26,6 +26,8 @@
 #include "Math/Random.h"
 #include "Math/MathUtils.h"
 
+#include "Physics/PhysicsSystem.h"
+
 #include "Renderer/Renderer.h"
 #include "Renderer/Font.h"
 #include "Renderer/Text.h"
@@ -44,6 +46,7 @@ namespace cool
 	extern Renderer g_renderer;
 	extern AudioSystem g_audioSystem;
 	extern ResourceManager g_resources;
+	extern PhysicsSystem g_physicsSystem;
 
 	class Engine : public Singleton<Engine>
 	{

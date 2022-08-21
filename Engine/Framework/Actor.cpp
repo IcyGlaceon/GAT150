@@ -56,7 +56,7 @@ namespace cool {
 		READ_DATA(value, tag);
 		READ_DATA(value, name);
 
-		m_transform.Read(value["actors"]);
+		m_transform.Read(value["transform"]);
 
 		if (!(value.HasMember("actors")) || !value["actors"].IsArray())
 		{

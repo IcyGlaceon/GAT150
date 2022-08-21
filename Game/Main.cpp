@@ -6,14 +6,13 @@ int main()
 	cool::InitializeMemory();
 	cool::SetFilePath("../Assets");
 	
-
-	
 	//initialize engine
 
 	cool::g_renderer.Initialize();
 	cool::g_inputSystem.Initialize();
 	cool::g_audioSystem.Initialize();
 	cool::g_resources.Initialize();
+	cool::g_physicsSystem.Initialize();
 
 	cool::Engine::Instance().Register();
 
@@ -39,6 +38,7 @@ int main()
 		cool::g_time.Tick();
 		cool::g_inputSystem.Update();
 		cool::g_audioSystem.Update();
+		cool::g_physicsSystem.Update();
 
 		if (cool::g_inputSystem.GetKeyDown(cool::key_escape)) quit = true;
 
@@ -51,8 +51,6 @@ int main()
 
 		cool::g_renderer.EndFrame();
 	}
-	
-
 
 	cool::g_audioSystem.Shutdown();
 	cool::g_renderer.Shutdown();
