@@ -14,7 +14,8 @@ namespace cool
 	public:
 		Actor() = default;
 		Actor(const Transform& transform) : m_transform{ transform } {}
-		
+	
+		virtual void Initialize() override; 
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer);
 
@@ -54,6 +55,8 @@ namespace cool
 		Actor* m_parent = nullptr;
 		std::vector<std::unique_ptr<Component>> m_components;
 		std::vector<std::unique_ptr<Actor>> m_children;		
+
+		// Inherited via GameObject
 	};
 
 	template<typename T>

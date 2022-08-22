@@ -3,16 +3,15 @@
 #include "Factory.h"
 
 namespace cool {
+	void Actor::Initialize()
+	{
+		for (auto& component : m_components) {component->Initialize();}
+		for (auto& child : m_children) {child->Initialize();}
+	}
 	void Actor::Update()
 	{
-		for (auto& component : m_components)
-		{
-			component->Update();
-		}
-		for (auto& child : m_children)
-		{
-			child->Update();
-		}
+		for (auto& component : m_components) {component->Update();}
+		for (auto& child : m_children) {child->Update();}
 
 		if (m_parent) m_transform.Update(m_parent->m_transform.matrix);
 		else m_transform.Update();
@@ -45,6 +44,7 @@ namespace cool {
 		component->m_owner = this;
 		m_components.push_back(std::move(component));
 	}
+
 
 	bool Actor::Write(const rapidjson::Value& value) const
 	{

@@ -27,6 +27,7 @@ int main()
 	bool success = cool::json::Load("level.txt", document);
 
 	scene.Read(document);
+	scene.Initialize();
 
 	float angle = 0;
 
