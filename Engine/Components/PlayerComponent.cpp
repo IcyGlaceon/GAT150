@@ -11,40 +11,34 @@ namespace cool
 		Vector2 direction = Vector2::zero;
 		if (g_inputSystem.GetKeyState(key_left) == InputSystem::State::Held)
 		{
-			m_owner->m_transform.rotation += 180 * g_time.deltaTime;
+			direction = Vector2::left;
 		}
 
 		if (g_inputSystem.GetKeyState(key_right) == InputSystem::State::Held)
 		{
-			m_owner->m_transform.rotation -= 180 * g_time.deltaTime;
-		}
-
-		float thrust = 0;
-		if (g_inputSystem.GetKeyState(key_up) == InputSystem::State::Held)
-		{
-			thrust = speed;
+			direction = Vector2::right;
 		}
 
 		auto component = m_owner->GetComponent<PhysicsComponent>();
 		if (component)
 		{
 			//thrust force
-			Vector2 force = Vector2::Rotate({ 1, 0 },math::DegToRad(m_owner->m_transform.rotation)) * thrust;
-			component->AppliedForce(force);
+			//Vector2 force = Vector2::Rotate({ 1, 0 },math::DegToRad(m_owner->m_transform.rotation)) * thrust;
+			component->AppliedForce(direction * speed);
 
 			//grav froce
-			force = (Vector2{ 400,300 } - m_owner->m_transform.position).Normalized() * 100.0f;
-			component->AppliedForce(force);
+			//force = (Vector2{ 400,300 } - m_owner->m_transform.position).Normalized() * 100.0f;
+			//component->AppliedForce(force);
 		}
 
-		m_owner->m_transform.position += direction * 300 * g_time.deltaTime;
-
+		//jump
 		if (g_inputSystem.GetKeyState(key_space) == InputSystem::State::Pressed)
 		{
-			auto component = m_owner->GetComponent<AudioComponent>();
+			auto component = m_owner->GetComponent<PhysicsComponent>();
+			
 			if (component)
 			{
-				component->Play();
+				component->AppliedForce(Vector2::up * 500);
 			}
 		}
 

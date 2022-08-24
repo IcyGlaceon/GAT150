@@ -2,6 +2,52 @@
    "actors":[
       {
          "type":"Actor",
+         "transform":{
+            "position":[
+               400,
+               300
+            ],
+            "scale":[
+               2,
+               2
+            ],
+            "rotation":0
+         },
+         "components":[
+            {
+               "type":"SpriteComponent",
+               "texture_name":"Textures/background.png"
+            }
+         ]
+         },
+          {
+         "type":"Actor",
+         "name":"Floor",
+         "transform":{
+            "position":[
+               400,
+               300
+            ],
+            "scale":[
+               2,
+               2
+            ],
+            "rotation":0
+         },
+         "components":[
+             {
+               "type":"RBPhysicsComponent",
+               "data.is_dynamic":false
+            },
+            {
+                "type":"CollisionComponent",
+                "data.size":[800,24]
+            }
+         ]
+         },
+         
+         {
+         "type":"Actor",
          "name":"Player",
          "tag":"player",
          "transform":{
@@ -18,11 +64,17 @@
          "components":[
             {
                "type":"PlayerComponent",
-               "speed":200
+               "speed":10
             },
             {
-               "type":"PhysicsComponent",
-               "damping":0.99
+               "type":"RBPhysicsComponent",
+               "damping":0.99,
+               "data.gravity_scale":1,
+               "data.constrain_angle":true
+            },
+            {
+                "type":"CollisionComponent",
+                "data.size":[48,48]
             },
             {
                "type":"SpriteAnimComponent",
