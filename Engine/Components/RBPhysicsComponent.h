@@ -10,6 +10,8 @@ namespace cool
 		RBPhysicsComponent() = default;
 		~RBPhysicsComponent();
 
+		CLASS_DECLARATION(RBPhysicsComponent)
+
 		void Initialize() override;
 		void Update() override;
 		void AppliedForce(const Vector2& force);

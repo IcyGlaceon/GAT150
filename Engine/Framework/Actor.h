@@ -13,7 +13,10 @@ namespace cool
 	{
 	public:
 		Actor() = default;
+		Actor(const Actor& other);
 		Actor(const Transform& transform) : m_transform{ transform } {}
+
+		CLASS_DECLARATION(Actor)
 	
 		virtual void Initialize() override; 
 		virtual void Update() override;
@@ -38,25 +41,30 @@ namespace cool
 		std::string& GetName() { return name; }
 		void SetName(const std::string& name) { this->name = name; }
 
+		void SetDestory() { m_destroy = true; }
+		bool IsDestory() { return m_destroy; }
+
+		void SetActive(bool active) { m_active = active; }
+		bool IsActive() { return m_active; }
+
+		Scene* GetScene() { return m_scene; }
+
 		friend class Scene;
+		friend class Component;
 
 		Transform m_transform;
 	protected:
 		std::string name;
 		std::string tag;
-
+		bool m_active = true;
 
 		bool m_destroy = false;
-		//pyysics
-		Vector2 m_velocity;
-		float m_damping = 1;
 
 		Scene* m_scene = nullptr;
 		Actor* m_parent = nullptr;
 		std::vector<std::unique_ptr<Component>> m_components;
 		std::vector<std::unique_ptr<Actor>> m_children;		
 
-		// Inherited via GameObject
 	};
 
 	template<typename T>

@@ -1,5 +1,6 @@
 #include "CollisionComponent.h"
 #include "Engine.h"
+#include <iostream>
 
 namespace cool
 {
@@ -10,9 +11,18 @@ namespace cool
 
         if (component)
         {
-        g_physicsSystem.SetCollisionBox(component->m_body, data,m_owner);
-        }
 
+            if(data.size.x ==0 && data.size.y == 0)
+            {
+                auto renderComponent = m_owner;
+                if (renderComponent)
+                {
+                    data.size = Vector2 {};
+                }
+            }
+         
+            g_physicsSystem.SetCollisionBox(component->m_body, data,m_owner);
+        }
     }
 
     void CollisionComponent::Update()
@@ -22,12 +32,12 @@ namespace cool
 
     void CollisionComponent::OnCollisionEnter(Actor* other)
     {
-
+       if(m_enterFunction) m_enterFunction(other);
     }
 
-    void CollisionComponent::OnCollisionEXit(Actor* other)
+    void CollisionComponent::OnCollisionExit(Actor* other)
     {
-
+       if(m_exitFunction) m_exitFunction(other);
     }
 
     bool CollisionComponent::Write(const rapidjson::Value& value) const

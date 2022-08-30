@@ -11,6 +11,7 @@
 #include "Framework/Game.h"
 #include "Framework/Factory.h"
 #include "Framework/Singleton.h"
+#include "Framework/EventManager.h"
 
 #include "Components/PlayerComponent.h"
 #include "Components/SpriteComponent.h"
@@ -20,6 +21,7 @@
 #include "Components/RBPhysicsComponent.h"
 #include "Components/ModelComponent.h"
 #include "Components/SpriteAnimComponent.h"
+#include "Components/TilemapComponent.h"
 
 #include "Input/InputSystem.h"
 #include "Audio/AudioSystem.h"
@@ -36,8 +38,8 @@
 #include "Renderer/Texture.h"
 #include "Renderer/Model.h"
 
-
-
+#include <vector>
+#include <variant>
 #include <memory>
 
 
@@ -49,6 +51,7 @@ namespace cool
 	extern AudioSystem g_audioSystem;
 	extern ResourceManager g_resources;
 	extern PhysicsSystem g_physicsSystem;
+	extern EventManager g_eventManager;
 
 	class Engine : public Singleton<Engine>
 	{

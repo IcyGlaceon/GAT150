@@ -12,6 +12,7 @@ namespace cool
 		void Update() override;
 		void AppliedForce(const Vector2& force) { acceleration += force; }
 
+		CLASS_DECLARATION(PhysicsComponent)
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;

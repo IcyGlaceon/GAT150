@@ -16,16 +16,26 @@ namespace cool
 	public:
 		Scene() = default;
 		Scene(Game* game) :m_game{ game } {}
+		Scene(const Scene& other) {}
 		~Scene() = default;
+
+		CLASS_DECLARATION(Scene)
 
 		void Update() override;
 		void Initialize() override;
 		void Draw(Renderer& renderer);
 		
 		void Add(std::unique_ptr<Actor> actor);
+		void RemoveAll();
 
 		template<typename T>
 		T* GetActor();
+
+		template<typename T = Actor>
+		T* GetActorFromName(const std::string& name);
+
+		template<typename T = Actor>
+		std::vector<T*> GetActorFromTag(const std::string& tag);
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
@@ -49,5 +59,35 @@ namespace cool
 		
 
 		return nullptr;
+	}
+
+	template<typename T>
+	inline T* Scene::GetActorFromName(const std::string& name)
+	{
+		for (auto actor : m_actors)
+		{
+			if (name == Actor::GetName())
+			{
+				return dynamic_cast<T*>(std::get(actor*));
+			}
+		}
+		return nullptr;
+	}
+
+	template<typename T>
+	inline std::vector<T*> Scene::GetActorFromTag(const std::string& tag)
+	{
+		std::vector<T*> result;
+
+		for (auto actor : m_actors)
+		{
+			if (tag == Actor::GetTag())
+			{
+				T* tagActor = dynamic_cast<T*>(std::get(actor*));
+				if (tagActor) result.push_back(tagActor);
+			}
+		}
+
+		return result;
 	}
 }

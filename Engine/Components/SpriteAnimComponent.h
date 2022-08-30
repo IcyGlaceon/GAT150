@@ -12,6 +12,7 @@ namespace cool
 		virtual void Update() override;
 		virtual void Draw(Renderer& renderer) override;
 
+		CLASS_DECLARATION(SpriteAnimComponent)
 
 		virtual bool Write(const rapidjson::Value& value) const override;
 		virtual bool Read(const rapidjson::Value& value) override;
@@ -28,7 +29,7 @@ namespace cool
 		float frameTimer = 0;
 
 
-		Rect source;
+		Rect& GetSource() override;
 		std::shared_ptr<Texture> m_texture;
 	};
 }

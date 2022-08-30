@@ -7,6 +7,7 @@ struct SDL_Texture;
 namespace cool
 {
 	class Renderer;
+	//struct SDL_Surface;
 
 	class Texture : public Resource
 	{
@@ -16,6 +17,7 @@ namespace cool
 
 		bool Create(std::string filename,...) override;
 		bool Create(Renderer& renderer, const std::string& filename);
+		//bool CreateFromSurface(SDL_Surface* surface, Renderer& renderer);
 
 		Vector2 GetSize() const;
 

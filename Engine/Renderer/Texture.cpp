@@ -37,19 +37,27 @@ namespace cool
         {
            LOG(SDL_GetError());
             return false;
-        }
-
-        // create texture 
-       m_texture = SDL_CreateTextureFromSurface(renderer.m_renderer, surface);
-            
-        if (m_texture == nullptr)
-        {
-        SDL_FreeSurface(surface);
-           LOG(SDL_GetError());
-            return false;
-        }
+        } 
             return true;
     }
+    /*
+    bool Texture::CreateFromSurface(SDL_Surface* surface, Renderer& renderer)
+    {
+        if (m_texture) SDL_DestroyTexture(m_texture);
+
+        // create texture 
+        m_texture = SDL_CreateTextureFromSurface(renderer.m_renderer, surface);
+
+        if (m_texture == nullptr)
+        {
+            SDL_FreeSurface(surface);
+            LOG(SDL_GetError());
+            return false;
+        }
+
+        return false;
+    }
+    */
 
     cool::Vector2 Texture::GetSize() const
     {

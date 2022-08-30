@@ -3,6 +3,22 @@
 #include "Factory.h"
 
 namespace cool {
+
+	Actor::Actor(const Actor& other)
+	{
+		name = other.name;
+		tag = other.tag;
+		m_transform = other.m_transform;
+
+		m_scene = other.m_scene;
+
+		for (auto& component : other.m_components)
+		{
+			auto clone = std::unique_ptr<Component>((Component*)component->Clone().release());
+			AddComponent(std::move(clone));
+		}
+	}
+	
 	void Actor::Initialize()
 	{
 		for (auto& component : m_components) {component->Initialize();}
@@ -10,6 +26,8 @@ namespace cool {
 	}
 	void Actor::Update()
 	{
+		if (!m_active) return;
+
 		for (auto& component : m_components) {component->Update();}
 		for (auto& child : m_children) {child->Update();}
 
@@ -18,6 +36,9 @@ namespace cool {
 	}
 	void Actor::Draw(Renderer& renderer)
 	{
+		if (!m_active) return;
+
+
 		for (auto& component : m_components)
 		{
 			auto renderComponent = dynamic_cast<RenderComponent*>(component.get());
@@ -55,10 +76,11 @@ namespace cool {
 	{
 		READ_DATA(value, tag);
 		READ_DATA(value, name);
+		READ_DATA(value, m_active);
 
-		m_transform.Read(value["transform"]);
+		if(value.HasMember("transform")) m_transform.Read(value["transform"]);
 
-		if (!(value.HasMember("actors")) || !value["actors"].IsArray())
+		if (!(value.HasMember("components")) || !value["components"].IsArray())
 		{
 			for (auto& componentValue : value["components"].GetArray())
 			{

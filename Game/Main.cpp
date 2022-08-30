@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "MyGame.h"
 #include <iostream>
 
 int main()
@@ -13,6 +14,7 @@ int main()
 	cool::g_audioSystem.Initialize();
 	cool::g_resources.Initialize();
 	cool::g_physicsSystem.Initialize();
+	cool::g_eventManager.Initialize();
 
 	cool::Engine::Instance().Register();
 
@@ -20,15 +22,10 @@ int main()
 	cool::g_renderer.CreateWindow("Neumont", 800, 600);
 	cool::g_renderer.setClearColor(cool::Color{ 60,60,60,255 });
 
-	//create actors
-	cool::Scene scene;
+	//create game
+	std::unique_ptr<MyGame> game = std::make_unique<MyGame>();
+	game->Initialize();
 	
-	rapidjson::Document document;
-	bool success = cool::json::Load("level.txt", document);
-
-	scene.Read(document);
-	scene.Initialize();
-
 	float angle = 0;
 
 	//game creation
@@ -40,20 +37,28 @@ int main()
 		cool::g_inputSystem.Update();
 		cool::g_audioSystem.Update();
 		cool::g_physicsSystem.Update();
+		cool::g_eventManager.Update();
 
 		if (cool::g_inputSystem.GetKeyDown(cool::key_escape)) quit = true;
 
-		scene.Update();
+		game->Update();
 
 		//renderer
 		cool::g_renderer.BeginFrame();
 
-		scene.Draw(cool::g_renderer);
+		game->Draw(cool::g_renderer);
 
 		cool::g_renderer.EndFrame();
 	}
+	game->Shutdown();
+	game.reset();
+
+	cool::Factory::Instance().Shutdown();
 
 	cool::g_audioSystem.Shutdown();
 	cool::g_renderer.Shutdown();
+	cool::g_inputSystem.Shutdown();
+	cool::g_eventManager.Shutdown();
+	cool::g_physicsSystem.Shutdown();
 	
 }

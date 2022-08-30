@@ -4,6 +4,16 @@
 
 namespace cool
 {
+	void PlayerComponent::Initialize()
+	{
+		auto component = m_owner->GetComponent<CollisionComponent>();
+		if (component)
+		{
+			component->SetCollisionEnter(std::bind(&PlayerComponent::OnCollisionEnter, this, std::placeholders::_1));
+			component->SetCollisionExit(std::bind(&PlayerComponent::OnCollisionExit, this, std::placeholders::_1));
+		}
+	}
+
 	void PlayerComponent::Update()
 	{
 		//update tranfrom with input
@@ -54,6 +64,27 @@ namespace cool
 			READ_DATA(value, speed);
 
 			return true;
+		}
+
+		void PlayerComponent::OnCollisionEnter(Actor* other)
+		{
+			if (other->GetName() == "Coin")
+			{
+				Event event;
+				event.name = "EVENT_ADD_POINTS";
+				event.data = 100;
+
+				g_eventManager.Notify(event);
+
+				other->SetDestory();
+			}
+
+			//std::cout << " AHHHHHHHHHHHHHH";
+		}
+
+		void PlayerComponent::OnCollisionExit(Actor* other)
+		{
+			//std::cout << "AHHHHHHHHHOOOOOOOOOOOOOOO";
 		}
 
 }
