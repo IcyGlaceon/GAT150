@@ -18,14 +18,6 @@ namespace cool
 				frame = start_frame;
 			}
 		}
-
-		int column = (frame - 1) % num_columns;
-		int row = (frame - 1) / num_columns;
-
-		source.x = (int)(column * cellSize.x);
-		source.y = (int)(row * cellSize.y);
-		source.w = (int)(cellSize.x);
-		source.h = (int)(cellSize.y);
 	}
 
 	void SpriteAnimComponent::Draw(Renderer& renderer)

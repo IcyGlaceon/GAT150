@@ -68,7 +68,7 @@ namespace cool
 		{
 			if (name == Actor::GetName())
 			{
-				return dynamic_cast<T*>(std::get(actor*));
+				return dynamic_cast<T*>(std::get(*Actor));
 			}
 		}
 		return nullptr;
@@ -83,7 +83,7 @@ namespace cool
 		{
 			if (tag == Actor::GetTag())
 			{
-				T* tagActor = dynamic_cast<T*>(std::get(actor*));
+				T* tagActor = dynamic_cast<T*>(std::get(*Actor));
 				if (tagActor) result.push_back(tagActor);
 			}
 		}

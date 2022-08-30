@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Component.h"
+#include "Math/Rect.h"
 
 namespace cool
 {
